@@ -1,0 +1,17 @@
+server:
+  port: 3030
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/studyolledb
+    username: everyuser
+    password: 1234
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+
