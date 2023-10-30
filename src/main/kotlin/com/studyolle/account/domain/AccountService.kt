@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service
 class AccountService(
     private val accountStore: AccountStore,
     private val passwordEncoder: PasswordEncoder,
+    private val emailService: MailService
 ) {
     private val log = LoggerFactory.getLogger(this::class.java)
 
@@ -18,15 +19,38 @@ class AccountService(
      */
     fun processNewAccount(signUpForm: AccountCommand.SignUpForm) {
         /* 신규 회원 저장 */
-        saveNewAccount(signUpForm)
+        val newAccount = saveNewAccount(signUpForm)
+
+        /* 이메일 토큰 발송 */
+        sendSignUpConfirmEmail(newAccount)
     }
 
-    private fun saveNewAccount(signUpForm: AccountCommand.SignUpForm) {
-        /* password set */
+    /**
+     * 이메일 토큰 발송
+     * 실제로 발송은 하지 않고 DB 상태 업데이트만 한다.
+     */
+    private fun sendSignUpConfirmEmail(account: Account) {
+        var message = "이메일 토큰 발송입니다."
+        message += "userID : " + account.id
+        message += "token : " + account.emailCheckToken
+
+        /* send */
+        emailService.sendEmail(message)
+    }
+
+    private fun saveNewAccount(signUpForm: AccountCommand.SignUpForm): Account {
+        /* setting password */
         signUpForm.password = passwordEncoder.encode(signUpForm.password)
 
-        /* account entity */
+        /* account form to entity */
         val account: Account = signUpForm.toEntity()
+
+        /* create email token */
+        account.generateEmailCheckToken()
+
+        /* save new account */
         accountStore.saveNewAccount(account)
+
+        return account
     }
 }
