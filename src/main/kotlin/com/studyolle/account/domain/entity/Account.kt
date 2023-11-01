@@ -22,13 +22,13 @@ class Account (
     val password: String? = null,
 
     /* 이메일 검증 */
-    val emailVerified: Boolean = false,
+    var emailVerified: Boolean = false,
 
     var emailCheckToken: String? = null,
 
     var emailCheckTokenGeneratedAt: LocalDateTime? = null,
 
-    val joinedAt: LocalDateTime? = null, // 가입일자
+    var joinedAt: LocalDateTime? = null, // 가입일자
 
     val bio: String? = null, // 자기소개
 
@@ -65,5 +65,10 @@ class Account (
     fun generateEmailCheckToken() {
         emailCheckToken = UUID.randomUUID().toString()
         emailCheckTokenGeneratedAt = LocalDateTime.now()
+    }
+
+    fun completeSignUp() {
+        emailVerified = true
+        joinedAt = LocalDateTime.now()
     }
 }

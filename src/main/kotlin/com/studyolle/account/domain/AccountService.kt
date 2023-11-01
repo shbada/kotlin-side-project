@@ -2,9 +2,12 @@ package com.studyolle.account.domain
 
 import com.studyolle.account.domain.command.AccountCommand
 import com.studyolle.account.domain.entity.Account
+import com.studyolle.common.exception.BadRequestException
+import com.studyolle.common.exception.ErrorMessage
 import org.slf4j.LoggerFactory
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
+import org.springframework.transaction.annotation.Transactional
 
 @Service
 class AccountService(
@@ -52,5 +55,17 @@ class AccountService(
         accountStore.saveNewAccount(account)
 
         return account
+    }
+
+    @Transactional
+    fun checkEmailToken(email: String, token: String) {
+        val account: Account = accountStore.findByEmail(email)
+
+        if (token != account.emailCheckToken) {
+            throw BadRequestException(ErrorMessage.INVALID_EMAIL_TOKEN)
+        }
+
+        /* 계정의 이메일 인증 처리 */
+        account.completeSignUp()
     }
 }
