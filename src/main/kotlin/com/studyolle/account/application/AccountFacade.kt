@@ -15,4 +15,12 @@ class AccountFacade(
     fun checkEmailToken(email: String, token: String) {
         accountService.checkEmailToken(email, token);
     }
+
+    fun reSendSignUpConfirmEmail(email: String) {
+        accountService.reSendSignUpConfirmEmail(email)
+    }
+
+    fun getAccountInfo(nickname: String, email: String) {
+        accountService.getAccountInfo(nickname, email)
+    }
 }

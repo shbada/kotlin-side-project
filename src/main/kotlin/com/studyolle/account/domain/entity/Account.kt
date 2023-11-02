@@ -71,4 +71,8 @@ class Account (
         emailVerified = true
         joinedAt = LocalDateTime.now()
     }
+
+    fun canSendConfirmEmail(): Boolean {
+        return emailCheckTokenGeneratedAt!!.isBefore(LocalDateTime.now().minusHours(1))
+    }
 }

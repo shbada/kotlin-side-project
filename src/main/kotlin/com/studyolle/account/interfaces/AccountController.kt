@@ -32,4 +32,21 @@ class AccountController(
     fun checkEmailToken(token: String, email: String) {
         accountFacade.checkEmailToken(email, token)
     }
+
+    /**
+     * 이메일 토큰 재발송
+     */
+    @GetMapping("/resend-confirm-email")
+    fun resendConfirmEmail(email: String) {
+        /* 이메일 인증 발송 */
+        accountFacade.reSendSignUpConfirmEmail(email)
+    }
+
+    /**
+     * 유저의 프로필 정보 조회
+     */
+    @GetMapping("/profile/{nickname}")
+    fun viewProfile(@PathVariable nickname: String, email: String) {
+        accountFacade.getAccountInfo(nickname, email)
+    }
 }

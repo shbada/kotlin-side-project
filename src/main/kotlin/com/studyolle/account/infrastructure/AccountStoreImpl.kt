@@ -15,4 +15,8 @@ class AccountStoreImpl(
     override fun findByEmail(email: String): Account {
         return accountRepository.findByEmail(email)
     }
+
+    override fun findByNickname(nickname: String): Account {
+        return accountRepository.findByNickname(nickname)
+    }
 }

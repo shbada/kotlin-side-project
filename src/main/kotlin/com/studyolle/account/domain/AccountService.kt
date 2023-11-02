@@ -68,4 +68,26 @@ class AccountService(
         /* 계정의 이메일 인증 처리 */
         account.completeSignUp()
     }
+
+    fun reSendSignUpConfirmEmail(email: String) {
+        val account: Account = accountStore.findByEmail(email)
+
+        /* 시간 체크 */
+        if (!account.canSendConfirmEmail()) {
+            throw BadRequestException(ErrorMessage.EMAIL_ONCE_PER_HOUR)
+        }
+
+        /* 이메일 토큰 발송 */
+        sendSignUpConfirmEmail(account)
+    }
+
+    fun getAccountInfo(nickname: String, email: String) {
+        /* 닉네임의 회원 조회 */
+        val accountToView: Account = accountStore.findByNickname(nickname)
+
+        /* 자기 자신 여부 */
+        if (accountToView.email != email) {
+            throw BadRequestException(ErrorMessage.NOT_EXIST_INFO)
+        }
+    }
 }
