@@ -1,10 +1,13 @@
 package com.studyolle.zone.interfaces
 
+import com.studyolle.common.response.CommonResponse
+import com.studyolle.common.response.ResponseDto
 import com.studyolle.zone.application.ZoneFacade
 import com.studyolle.zone.interfaces.dto.ZoneDto
 import com.studyolle.zone.interfaces.mapper.ZoneDtoMapper
 import lombok.RequiredArgsConstructor
 import lombok.extern.slf4j.Slf4j
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -29,8 +32,9 @@ class ZoneController(
     @PostMapping
     fun registerZone(
         @RequestBody registerForm: ZoneDto.RegisterForm
-    ) {
+    ): ResponseEntity<ResponseDto<Void>> {
         zoneFacade.registerZone(ZoneDtoMapper.of(registerForm))
+        return CommonResponse.send()
     }
 
     /**
@@ -39,7 +43,8 @@ class ZoneController(
     @DeleteMapping
     fun deleteZone(
         @RequestBody city: String
-    ) {
+    ): ResponseEntity<ResponseDto<Void>> {
         zoneFacade.deleteZone(city)
+        return CommonResponse.send()
     }
 }
