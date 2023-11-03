@@ -15,4 +15,8 @@ class ZoneFacade(
     fun registerZone(zoneCommand: ZoneCommand.RegisterForm) {
         zoneService.registerZone(zoneCommand)
     }
+
+    fun deleteZone(city: String) {
+        zoneService.deleteZone(city)
+    }
 }

@@ -1,5 +1,7 @@
 package com.studyolle.zone.domain
 
+import com.studyolle.common.exception.BadRequestException
+import com.studyolle.common.exception.ErrorMessage
 import com.studyolle.tag.domain.entity.Tag
 import com.studyolle.zone.domain.command.ZoneCommand
 import com.studyolle.zone.domain.entity.Zone
@@ -43,5 +45,12 @@ class ZoneService(
             zoneStore.save(zone)
         }
 
+    }
+
+    fun deleteZone(city: String) {
+        /* zone 조회 */
+        var zone: Zone = zoneReader.findByCity(city) ?: throw BadRequestException(ErrorMessage.NOT_EXIST_INFO)
+
+        zoneStore.delete(zone)
     }
 }

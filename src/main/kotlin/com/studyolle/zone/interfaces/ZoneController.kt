@@ -5,10 +5,7 @@ import com.studyolle.zone.interfaces.dto.ZoneDto
 import com.studyolle.zone.interfaces.mapper.ZoneDtoMapper
 import lombok.RequiredArgsConstructor
 import lombok.extern.slf4j.Slf4j
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequiredArgsConstructor
@@ -34,5 +31,15 @@ class ZoneController(
         @RequestBody registerForm: ZoneDto.RegisterForm
     ) {
         zoneFacade.registerZone(ZoneDtoMapper.of(registerForm))
+    }
+
+    /**
+     * zone 삭제
+     */
+    @DeleteMapping
+    fun deleteZone(
+        @RequestBody city: String
+    ) {
+        zoneFacade.deleteZone(city)
     }
 }

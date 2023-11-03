@@ -15,4 +15,8 @@ class ZoneStoreImpl(
     override fun saveAll(zoneList: List<Zone>) {
         zoneRepository.saveAll(zoneList)
     }
+
+    override fun delete(zone: Zone) {
+        zoneRepository.delete(zone)
+    }
 }

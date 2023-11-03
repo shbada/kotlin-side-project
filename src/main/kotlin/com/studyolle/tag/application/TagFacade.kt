@@ -12,4 +12,8 @@ class TagFacade(
         tagService.registerTag(tagCommand)
     }
 
+    fun deleteTag(title: String) {
+        tagService.deleteTag(title)
+    }
+
 }

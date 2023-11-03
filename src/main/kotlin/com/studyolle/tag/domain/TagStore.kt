@@ -4,4 +4,5 @@ import com.studyolle.tag.domain.entity.Tag
 
 interface TagStore {
     fun registerTag(tag: Tag)
+    fun delete(tag: Tag)
 }

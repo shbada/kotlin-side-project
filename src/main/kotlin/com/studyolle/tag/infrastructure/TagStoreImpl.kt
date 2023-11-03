@@ -11,4 +11,8 @@ class TagStoreImpl(
     override fun registerTag(tag: Tag) {
         tagRepository.save(tag)
     }
+
+    override fun delete(tag: Tag) {
+        tagRepository.delete(tag)
+    }
 }
