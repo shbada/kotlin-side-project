@@ -14,4 +14,9 @@ class ExceptionGlobalHandler {
     fun domainException(e: BadRequestException): ResponseEntity<*> {
         return CommonResponse.send(e.errorMessage, null)
     }
+
+    @ExceptionHandler(Exception::class)
+    fun serverException(e: Exception): ResponseEntity<*> {
+        return CommonResponse.send(ErrorMessage.INTERNAL_SERVER_ERROR, null)
+    }
 }

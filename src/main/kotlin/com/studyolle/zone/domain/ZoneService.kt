@@ -2,7 +2,6 @@ package com.studyolle.zone.domain
 
 import com.studyolle.common.exception.BadRequestException
 import com.studyolle.common.exception.ErrorMessage
-import com.studyolle.tag.domain.entity.Tag
 import com.studyolle.zone.domain.command.ZoneCommand
 import com.studyolle.zone.domain.entity.Zone
 import org.springframework.core.io.ClassPathResource
@@ -10,7 +9,6 @@ import org.springframework.core.io.Resource
 import org.springframework.stereotype.Service
 import java.nio.charset.StandardCharsets
 import java.nio.file.Files
-import java.nio.file.Path
 import java.util.stream.Collectors
 
 @Service
@@ -36,10 +34,10 @@ class ZoneService(
 
     fun registerZone(zoneCommand: ZoneCommand.RegisterForm) {
         /* zone 조회 */
-        var zone: Zone? = zoneReader.findByCity(zoneCommand.city)
+        val zone: Zone? = zoneReader.findByCity(zoneCommand.city)
 
         if (zone == null) {
-            var zone : Zone = zoneCommand.toEntity()
+            val zone : Zone = zoneCommand.toEntity()
 
             /* 신규 등록 */
             zoneStore.save(zone)
@@ -49,8 +47,21 @@ class ZoneService(
 
     fun deleteZone(city: String) {
         /* zone 조회 */
-        var zone: Zone = zoneReader.findByCity(city) ?: throw BadRequestException(ErrorMessage.NOT_EXIST_INFO)
+        val zone: Zone = zoneReader.findByCity(city) ?: throw BadRequestException(ErrorMessage.NOT_EXIST_INFO)
 
         zoneStore.delete(zone)
+    }
+
+    fun getZoneList(): MutableList<ZoneCommand> {
+        return zoneReader.findAll()
+            .stream()
+            .map { zone ->
+                ZoneCommand(
+                    city = zone.city,
+                    localNameOfCity = zone.localNameOfCity,
+                    province = zone.province
+                )
+            }
+            .collect(Collectors.toList())
     }
 }

@@ -15,4 +15,8 @@ class ZoneReaderImpl(
     override fun findByCity(city: String): Zone? {
         return zoneRepository.findByCity(city)
     }
+
+    override fun findAll(): MutableList<Zone> {
+        return zoneRepository.findAll()
+    }
 }

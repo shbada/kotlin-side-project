@@ -2,7 +2,11 @@ package com.studyolle.zone.domain.command
 
 import com.studyolle.zone.domain.entity.Zone
 
-class ZoneCommand {
+class ZoneCommand(
+    var city: String? = "",
+    var localNameOfCity: String? = "",
+    var province: String? = "",
+) {
     data class RegisterForm(
         val city: String,
         val localNameOfCity: String,
