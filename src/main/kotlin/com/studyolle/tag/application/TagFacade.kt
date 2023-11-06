@@ -2,6 +2,7 @@ package com.studyolle.tag.application
 
 import com.studyolle.tag.domain.TagService
 import com.studyolle.tag.domain.command.TagCommand
+import com.studyolle.zone.domain.command.ZoneCommand
 import org.springframework.stereotype.Service
 
 @Service
@@ -14,6 +15,10 @@ class TagFacade(
 
     fun deleteTag(title: String) {
         tagService.deleteTag(title)
+    }
+
+    fun getTagList(): MutableList<TagCommand> {
+        return tagService.getTagList()
     }
 
 }

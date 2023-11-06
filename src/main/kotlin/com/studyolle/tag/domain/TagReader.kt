@@ -4,4 +4,5 @@ import com.studyolle.tag.domain.entity.Tag
 
 interface TagReader {
     fun findByTitle(title: String): Tag?
+    fun findAll(): MutableList<Tag>
 }

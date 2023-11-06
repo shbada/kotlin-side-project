@@ -2,7 +2,9 @@ package com.studyolle.tag.domain.command
 
 import com.studyolle.tag.domain.entity.Tag
 
-class TagCommand {
+class TagCommand(
+    val title: String,
+) {
     data class RegisterForm(
         val title: String,
     ) {

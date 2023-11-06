@@ -4,7 +4,9 @@ import com.studyolle.common.exception.BadRequestException
 import com.studyolle.common.exception.ErrorMessage
 import com.studyolle.tag.domain.command.TagCommand
 import com.studyolle.tag.domain.entity.Tag
+import com.studyolle.zone.domain.command.ZoneCommand
 import org.springframework.stereotype.Service
+import java.util.stream.Collectors
 
 @Service
 class TagService(
@@ -28,6 +30,17 @@ class TagService(
         var tag: Tag = tagReader.findByTitle(title) ?: throw BadRequestException(ErrorMessage.NOT_EXIST_INFO)
 
         tagStore.delete(tag)
+    }
+
+    fun getTagList(): MutableList<TagCommand> {
+        return tagReader.findAll()
+            .stream()
+            .map { tag ->
+                TagCommand(
+                    title = tag.title,
+                )
+            }
+            .collect(Collectors.toList())
     }
 
 }

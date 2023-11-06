@@ -5,14 +5,12 @@ import com.studyolle.common.response.ResponseDto
 import com.studyolle.tag.application.TagFacade
 import com.studyolle.tag.interfaces.dto.TagDto
 import com.studyolle.tag.interfaces.mapper.TagDtoMapper
+import com.studyolle.zone.interfaces.dto.ZoneDto
 import lombok.RequiredArgsConstructor
 import lombok.extern.slf4j.Slf4j
 import org.springframework.http.ResponseEntity
-import org.springframework.web.bind.annotation.DeleteMapping
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
+import java.util.stream.Collectors
 
 @RestController
 @RequiredArgsConstructor
@@ -41,5 +39,22 @@ class TagController(
     ): ResponseEntity<ResponseDto<Void>> {
         tagFacade.deleteTag(title)
         return CommonResponse.send()
+    }
+
+    @GetMapping()
+    fun getTagList(
+    ): ResponseEntity<ResponseDto<List<TagDto>>> {
+        val tagList = tagFacade.getTagList()
+
+        val tagDtoList = tagList
+            .stream()
+            .map { tag ->
+                TagDto(
+                    title = tag.title,
+                )
+            }
+            .collect(Collectors.toList())
+
+        return CommonResponse.send(tagDtoList)
     }
 }

@@ -11,7 +11,7 @@ class Tag (
     private val id: Long? = null,
 
     @Column(unique = true)
-    private val title: String? = null
+    var title: String
 ) : BaseEntity() {
 
 }
