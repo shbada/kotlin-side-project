@@ -21,4 +21,8 @@ class TagFacade(
         return tagService.getTagList()
     }
 
+    fun findByTitle(title: String): TagCommand {
+        return tagService.findByTitle(title)
+    }
+
 }

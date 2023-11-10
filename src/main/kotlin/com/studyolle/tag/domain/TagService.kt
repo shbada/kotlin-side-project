@@ -43,4 +43,11 @@ class TagService(
             .collect(Collectors.toList())
     }
 
+    fun findByTitle(title: String): TagCommand {
+        /* tag 조회 */
+        var tag: Tag = tagReader.findByTitle(title) ?: throw BadRequestException(ErrorMessage.NOT_EXIST_INFO)
+
+        return TagCommand(title = tag.title)
+    }
+
 }

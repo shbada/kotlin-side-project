@@ -41,6 +41,9 @@ class TagController(
         return CommonResponse.send()
     }
 
+    /**
+     * 태그 리스트 조회
+     */
     @GetMapping()
     fun getTagList(
     ): ResponseEntity<ResponseDto<List<TagDto>>> {
@@ -56,5 +59,16 @@ class TagController(
             .collect(Collectors.toList())
 
         return CommonResponse.send(tagDtoList)
+    }
+
+    /**
+     * 태그 정보 조회
+     */
+    @GetMapping()
+    fun getTag(
+        @RequestParam title: String
+    ): ResponseEntity<ResponseDto<TagDto>> {
+        val tagCommand = tagFacade.findByTitle(title)
+        return CommonResponse.send(TagDto(title = tagCommand.title))
     }
 }
