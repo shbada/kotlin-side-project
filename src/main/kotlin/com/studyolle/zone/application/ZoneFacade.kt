@@ -24,4 +24,8 @@ class ZoneFacade(
     fun getZoneList(): MutableList<ZoneCommand> {
         return zoneService.getZoneList()
     }
+
+    fun findByCity(city: String): ZoneCommand {
+        return zoneService.findByCity(city)
+    }
 }

@@ -64,4 +64,9 @@ class ZoneService(
             }
             .collect(Collectors.toList())
     }
+
+    fun findByCity(city: String): ZoneCommand {
+        val zone: Zone = zoneReader.findByCity(city) ?: throw BadRequestException(ErrorMessage.NOT_EXIST_INFO)
+        return ZoneCommand(zone.city, zone.localNameOfCity, zone.province)
+    }
 }

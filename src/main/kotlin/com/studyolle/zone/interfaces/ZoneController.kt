@@ -2,6 +2,7 @@ package com.studyolle.zone.interfaces
 
 import com.studyolle.common.response.CommonResponse
 import com.studyolle.common.response.ResponseDto
+import com.studyolle.tag.interfaces.dto.TagDto
 import com.studyolle.zone.application.ZoneFacade
 import com.studyolle.zone.domain.command.ZoneCommand
 import com.studyolle.zone.interfaces.dto.ZoneDto
@@ -72,4 +73,14 @@ class ZoneController(
         return CommonResponse.send(zoneDtoList)
     }
 
+    /**
+     * zone 정보 조회
+     */
+    @GetMapping()
+    fun getZone(
+        @RequestParam city: String
+    ): ResponseEntity<ResponseDto<ZoneDto>> {
+        val zoneCommand = zoneFacade.findByCity(city)
+        return CommonResponse.send(ZoneDto(zoneCommand.city, zoneCommand.localNameOfCity, zoneCommand.province))
+    }
 }
