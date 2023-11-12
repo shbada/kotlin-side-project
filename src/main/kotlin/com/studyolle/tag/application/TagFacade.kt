@@ -17,8 +17,8 @@ class TagFacade(
         tagService.deleteTag(title)
     }
 
-    fun getTagList(): MutableList<TagCommand> {
-        return tagService.getTagList()
+    fun findAll(): MutableList<TagCommand> {
+        return tagService.findAll()
     }
 
     fun findByTitle(title: String): TagCommand {

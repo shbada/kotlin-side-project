@@ -47,7 +47,7 @@ class TagController(
     @GetMapping()
     fun getTagList(
     ): ResponseEntity<ResponseDto<List<TagDto>>> {
-        val tagList = tagFacade.getTagList()
+        val tagList = tagFacade.findAll()
 
         val tagDtoList = tagList
             .stream()

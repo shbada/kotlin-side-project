@@ -32,7 +32,7 @@ class TagService(
         tagStore.delete(tag)
     }
 
-    fun getTagList(): MutableList<TagCommand> {
+    fun findAll(): MutableList<TagCommand> {
         return tagReader.findAll()
             .stream()
             .map { tag ->

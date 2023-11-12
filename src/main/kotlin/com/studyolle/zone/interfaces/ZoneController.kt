@@ -57,7 +57,7 @@ class ZoneController(
     @GetMapping()
     fun getZoneList(
     ): ResponseEntity<ResponseDto<List<ZoneDto>>> {
-        val zoneList = zoneFacade.getZoneList()
+        val zoneList = zoneFacade.findAll()
 
         val zoneDtoList = zoneList
             .stream()

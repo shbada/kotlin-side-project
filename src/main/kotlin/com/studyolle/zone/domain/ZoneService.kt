@@ -52,7 +52,7 @@ class ZoneService(
         zoneStore.delete(zone)
     }
 
-    fun getZoneList(): MutableList<ZoneCommand> {
+    fun findAll(): MutableList<ZoneCommand> {
         return zoneReader.findAll()
             .stream()
             .map { zone ->

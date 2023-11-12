@@ -21,8 +21,8 @@ class ZoneFacade(
         zoneService.deleteZone(city)
     }
 
-    fun getZoneList(): MutableList<ZoneCommand> {
-        return zoneService.getZoneList()
+    fun findAll(): MutableList<ZoneCommand> {
+        return zoneService.findAll()
     }
 
     fun findByCity(city: String): ZoneCommand {
