@@ -4,13 +4,16 @@ import com.studyolle.common.exception.BadRequestException
 import com.studyolle.common.exception.ErrorMessage
 import com.studyolle.study.domain.command.StudyCommand
 import com.studyolle.study.domain.entity.Study
+import com.studyolle.zone.domain.command.ZoneCommand
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Service
 import java.util.*
+import java.util.stream.Collectors
 
 @Service
 class StudyService(
-    private val studyStore: StudyStore
+    private val studyStore: StudyStore,
+    private val studyReader: StudyReader,
 ) {
     private val log = LoggerFactory.getLogger(this::class.java)
 
@@ -31,5 +34,20 @@ class StudyService(
         }
 
         return study.get()
+    }
+
+    fun findAll(): MutableList<StudyCommand> {
+        return studyReader.findAll()
+            .stream()
+            .map { study ->
+                StudyCommand(
+                    path = study.path,
+                    title = study.title,
+                    shortDescription = study.shortDescription,
+                    fullDescription = study.fullDescription
+                )
+            }
+            .collect(Collectors.toList())
+
     }
 }

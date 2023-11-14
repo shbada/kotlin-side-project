@@ -11,54 +11,54 @@ import java.time.LocalDateTime
 @Entity
 class Study (
     @Id @GeneratedValue
-    private var id: Long? = null,
+    var id: Long? = null,
 
     /* study_managers 테이블 생성 */
     @ManyToMany
-    private val managers: Set<Account> = HashSet<Account>(),
+    val managers: Set<Account> = HashSet<Account>(),
 
     /* study_members 테이블 생성 */
     @ManyToMany
-    private val members: Set<Account> = HashSet<Account>(),
+    val members: Set<Account> = HashSet<Account>(),
 
     @Column(unique = true)
-    private var path: String? = null,
+    var path: String,
 
-    private val title: String? = null,
+    val title: String,
 
-    private val shortDescription: String? = null,
-
-    @Lob
-    @Basic(fetch = FetchType.EAGER)
-    private val fullDescription: String? = null,
+    val shortDescription: String? = null,
 
     @Lob
     @Basic(fetch = FetchType.EAGER)
-    private val image: String? = null,
+    val fullDescription: String? = null,
+
+    @Lob
+    @Basic(fetch = FetchType.EAGER)
+    val image: String? = null,
 
     /* study_tags 테이블 생성 */
     @ManyToMany
-    private val tags: Set<Tag> = HashSet<Tag>(),
+    val tags: Set<Tag> = HashSet<Tag>(),
 
     /* study_zones 테이블 생성 */
     @ManyToMany
-    private val zones: Set<Zone> = HashSet<Zone>(),
+    val zones: Set<Zone> = HashSet<Zone>(),
 
-    private val publishedDateTime: LocalDateTime? = null,
+    val publishedDateTime: LocalDateTime? = null,
 
-    private val closedDateTime: LocalDateTime? = null,
+    val closedDateTime: LocalDateTime? = null,
 
-    private val recruitingUpdatedDateTime: LocalDateTime? = null,
+    val recruitingUpdatedDateTime: LocalDateTime? = null,
 
-    private val recruiting: Boolean = false,
+    val recruiting: Boolean = false,
 
-    private val published: Boolean = false,
+    val published: Boolean = false,
 
-    private val closed: Boolean = false,
+    val closed: Boolean = false,
 
-    private val useBanner: Boolean = false,
+    val useBanner: Boolean = false,
 
-    private val memberCount: Long = 0
+    val memberCount: Long = 0
 ) : BaseEntity() {
 
 }
