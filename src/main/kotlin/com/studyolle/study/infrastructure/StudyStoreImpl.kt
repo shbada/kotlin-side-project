@@ -12,8 +12,4 @@ class StudyStoreImpl(
     override fun createNewStudy(study: Study) {
         studyRepository.save(study)
     }
-
-    override fun getStudy(studyIdx: Long): Optional<Study> {
-        return studyRepository.findById(studyIdx)
-    }
 }

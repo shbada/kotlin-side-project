@@ -33,10 +33,10 @@ class StudyController(
      * 스터디 단건조회
      */
     @GetMapping("/{studyIdx}")
-    fun getStudy(
+    fun findById(
         @PathVariable studyIdx: Long
     ): ResponseEntity<*> {
-        return CommonResponse.send(studyFacade.getStudy(studyIdx))
+        return CommonResponse.send(studyFacade.findById(studyIdx))
     }
 
     @GetMapping()

@@ -13,8 +13,8 @@ class StudyFacade(
         studyService.createNewStudy(registerForm)
     }
 
-    fun getStudy(studyIdx: Long) {
-        studyService.getStudy(studyIdx)
+    fun findById(studyIdx: Long) {
+        studyService.findById(studyIdx)
     }
 
     fun findAll(): MutableList<StudyCommand> {

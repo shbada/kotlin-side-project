@@ -26,8 +26,8 @@ class StudyService(
         studyStore.createNewStudy(study)
     }
 
-    fun getStudy(studyIdx: Long): Study {
-        val study: Optional<Study> = studyStore.getStudy(studyIdx)
+    fun findById(studyIdx: Long): Study {
+        val study: Optional<Study> = studyReader.findById(studyIdx)
 
         if (!study.isPresent) {
             throw BadRequestException(ErrorMessage.NOT_EXIST_INFO)
