@@ -46,14 +46,7 @@ class StudyController(
 
         val studyDtoList = studyList
             .stream()
-            .map { study ->
-                StudyDto(
-                    path = study.path,
-                    title = study.title,
-                    shortDescription = study.shortDescription,
-                    fullDescription = study.fullDescription
-                )
-            }
+            .map(StudyDtoMapper.Companion::of)
             .collect(Collectors.toList())
 
         return CommonResponse.send(studyDtoList)

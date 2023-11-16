@@ -51,11 +51,7 @@ class TagController(
 
         val tagDtoList = tagList
             .stream()
-            .map { tag ->
-                TagDto(
-                    title = tag.title,
-                )
-            }
+            .map(TagDtoMapper.Companion::of)
             .collect(Collectors.toList())
 
         return CommonResponse.send(tagDtoList)

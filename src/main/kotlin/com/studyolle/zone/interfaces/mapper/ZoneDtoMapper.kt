@@ -11,5 +11,12 @@ class ZoneDtoMapper {
                 localNameOfCity = registerForm.localNameOfCity,
                 province = registerForm.province,
             )
+
+        fun of(zoneCommand: ZoneCommand): ZoneDto =
+            ZoneDto(
+                city = zoneCommand.city,
+                localNameOfCity = zoneCommand.localNameOfCity,
+                province = zoneCommand.province
+            )
     }
 }

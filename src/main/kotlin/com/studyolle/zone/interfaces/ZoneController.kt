@@ -61,13 +61,7 @@ class ZoneController(
 
         val zoneDtoList = zoneList
             .stream()
-            .map { zone ->
-                ZoneDto(
-                    city = zone.city,
-                    localNameOfCity = zone.localNameOfCity,
-                    province = zone.province
-                )
-            }
+            .map(ZoneDtoMapper.Companion::of)
             .collect(Collectors.toList())
 
         return CommonResponse.send(zoneDtoList)

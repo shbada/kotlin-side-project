@@ -9,5 +9,10 @@ class TagDtoMapper {
             TagCommand.RegisterForm(
                 title = registerForm.title,
             )
+
+        fun of(tagCommand: TagCommand): TagDto =
+            TagDto(
+                title = tagCommand.title,
+            )
     }
 }
