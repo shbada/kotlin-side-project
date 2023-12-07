@@ -61,12 +61,13 @@ class AccountService(
     fun checkEmailToken(email: String, token: String) {
         val account: Account = accountStore.findByEmail(email)
 
-        if (token != account.emailCheckToken) {
-            throw BadRequestException(ErrorMessage.INVALID_EMAIL_TOKEN)
+        /* 계정의 이메일 인증 처리 */
+        when (token != account.emailCheckToken) { // when절 써보기
+            true -> account.completeSignUp()
+            false -> throw BadRequestException(ErrorMessage.INVALID_EMAIL_TOKEN)
         }
 
-        /* 계정의 이메일 인증 처리 */
-        account.completeSignUp()
+//        account.completeSignUp()
     }
 
     fun reSendSignUpConfirmEmail(email: String) {

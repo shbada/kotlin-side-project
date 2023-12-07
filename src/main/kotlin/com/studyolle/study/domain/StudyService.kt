@@ -29,11 +29,10 @@ class StudyService(
     fun findById(studyIdx: Long): Study {
         val study: Optional<Study> = studyReader.findById(studyIdx)
 
-        if (!study.isPresent) {
-            throw BadRequestException(ErrorMessage.NOT_EXIST_INFO)
+        when (!study.isPresent) { // when절 써보기
+            true -> return study.get()
+            false -> throw BadRequestException(ErrorMessage.NOT_EXIST_INFO)
         }
-
-        return study.get()
     }
 
     fun findAll(): MutableList<StudyCommand> {
