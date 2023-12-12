@@ -1,3 +1,7 @@
+### clone project
+- https://github.com/seohaebada/2021to2022/tree/master/jpa/studyolle_jpa
+  - 위 프로젝트를 JAVA -> Kotlin으로 전환하는 프로젝트
+
 ## 1. Account
 |               |         | 
 |---------------|---------|
