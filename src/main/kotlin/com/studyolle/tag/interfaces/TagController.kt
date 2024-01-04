@@ -44,7 +44,7 @@ class TagController(
     /**
      * 태그 리스트 조회
      */
-    @GetMapping()
+    @GetMapping("/list")
     fun getTagList(
     ): ResponseEntity<ResponseDto<List<TagDto>>> {
         val tagList = tagFacade.findAll()
