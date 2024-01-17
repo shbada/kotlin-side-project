@@ -6,4 +6,9 @@ class AccountDto {
         val email: String,
         val password: String,
     )
+
+    data class PasswordForm(
+            val email: String,
+            val password: String,
+    )
 }

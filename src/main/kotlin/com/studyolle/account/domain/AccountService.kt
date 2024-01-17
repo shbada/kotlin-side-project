@@ -2,6 +2,7 @@ package com.studyolle.account.domain
 
 import com.studyolle.account.domain.command.AccountCommand
 import com.studyolle.account.domain.entity.Account
+import com.studyolle.account.interfaces.dto.AccountDto
 import com.studyolle.common.exception.BadRequestException
 import com.studyolle.common.exception.ErrorMessage
 import org.slf4j.LoggerFactory
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class AccountService(
     private val accountStore: AccountStore,
+    private val accountReader: AccountReader,
     private val passwordEncoder: PasswordEncoder,
     private val emailService: MailService
 ) {
@@ -59,7 +61,7 @@ class AccountService(
 
     @Transactional
     fun checkEmailToken(email: String, token: String) {
-        val account: Account = accountStore.findByEmail(email)
+        val account: Account = accountReader.findByEmail(email)
 
         /* 계정의 이메일 인증 처리 */
         when (token != account.emailCheckToken) { // when절 써보기
@@ -71,7 +73,7 @@ class AccountService(
     }
 
     fun reSendSignUpConfirmEmail(email: String) {
-        val account: Account = accountStore.findByEmail(email)
+        val account: Account = accountReader.findByEmail(email)
 
         /* 시간 체크 */
         if (!account.canSendConfirmEmail()) {
@@ -84,11 +86,18 @@ class AccountService(
 
     fun getAccountInfo(nickname: String, email: String) {
         /* 닉네임의 회원 조회 */
-        val accountToView: Account = accountStore.findByNickname(nickname)
+        val accountToView: Account = accountReader.findByNickname(nickname)
 
         /* 자기 자신 여부 */
         if (accountToView.email != email) {
             throw BadRequestException(ErrorMessage.NOT_EXIST_INFO)
         }
+    }
+
+    fun updatePassword(passwordForm: AccountDto.PasswordForm) {
+        val account: Account = accountReader.findByEmail(passwordForm.email)
+
+        /* 비밀번호 업데이트 수행 */
+        account.updatePassword(passwordForm.password)
     }
 }
