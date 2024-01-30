@@ -14,4 +14,6 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
-
+  data:
+    mongodb:
+      uri: mongodb+srv://studyollemongo:1234@cluster0.es9fp8f.mongodb.net/studyolledb?retryWrites=true&w=majority
