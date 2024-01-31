@@ -5,6 +5,7 @@ import com.studyolle.account.application.AccountLoginFacade
 import com.studyolle.account.interfaces.dto.AccountDto
 import com.studyolle.account.interfaces.dto.AccountLoginDto
 import com.studyolle.account.interfaces.mapper.AccountDtoMapper
+import com.studyolle.account.interfaces.mapper.AccountLoginDtoMapper
 import com.studyolle.common.response.CommonResponse
 import com.studyolle.common.response.ResponseDto
 import com.studyolle.study.interfaces.dto.StudyDto
@@ -29,9 +30,13 @@ class AccountLoginController(
     @GetMapping()
     fun getAccountLoginNameList(
     ): ResponseEntity<ResponseDto<List<AccountLoginDto>>> {
-        val resultList = accountLoginFacade.findAll()
+        val accountLoginList = accountLoginFacade.findAll()
 
-        // TODO
-        return CommonResponse.send(Collections.emptyList())
+        val accountLoginDtoList = accountLoginList
+            .stream()
+            .map(AccountLoginDtoMapper.Companion::of)
+            .collect(Collectors.toList())
+
+        return CommonResponse.send(accountLoginDtoList)
     }
 }

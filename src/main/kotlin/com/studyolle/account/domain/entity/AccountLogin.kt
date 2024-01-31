@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Document
 class AccountLogin(
     @Id
     val _id: String,
-    val nickname: String? = null
+    val nickname: String
 ) {
 
 }
