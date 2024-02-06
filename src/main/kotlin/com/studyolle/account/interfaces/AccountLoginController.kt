@@ -20,7 +20,9 @@ import java.util.stream.Collectors
 class AccountLoginController(
     private val accountLoginFacade: AccountLoginFacade
 ) {
-
+    /**
+     * 로그인 히스토리 단건 등록
+     */
     @PostMapping
     fun registerAccountLogin(
         @RequestBody registerForm: AccountLoginDto.RegisterForm
