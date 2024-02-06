@@ -1,9 +1,7 @@
 package com.studyolle.account.interfaces
 
 import com.studyolle.account.application.AccountLoginFacade
-import com.studyolle.account.interfaces.dto.AccountDto
 import com.studyolle.account.interfaces.dto.AccountLoginDto
-import com.studyolle.account.interfaces.mapper.AccountDtoMapper
 import com.studyolle.account.interfaces.mapper.AccountLoginDtoMapper
 import com.studyolle.common.response.CommonResponse
 import com.studyolle.common.response.ResponseDto
