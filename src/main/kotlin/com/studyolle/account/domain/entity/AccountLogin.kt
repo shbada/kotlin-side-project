@@ -10,7 +10,7 @@ import org.springframework.data.mongodb.core.mapping.Document
 @Document(collection = "account_login")
 class AccountLogin(
     @Id
-    val _id: String,
+    var _id: String? = null,
     val nickname: String
 ) {
 

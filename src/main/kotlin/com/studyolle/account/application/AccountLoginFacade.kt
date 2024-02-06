@@ -14,4 +14,8 @@ class AccountLoginFacade(
         return accountLoginService.findAll()
     }
 
+    fun registerAccountLogin(registerForm: AccountLoginCommand.RegisterForm) {
+        accountLoginService.registerAccountLogin(registerForm)
+    }
+
 }
