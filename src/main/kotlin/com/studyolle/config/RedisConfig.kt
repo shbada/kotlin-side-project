@@ -19,7 +19,7 @@ import org.springframework.context.annotation.Primary
 class RedisConfig {
 
     @Value("\${spring.data.redis.host}")
-    private val host: String? = null
+    private val host: String = "127.0.0.1:6379"
 
     @Value("\${spring.data.redis.port}")
     private val port: Int = 0
@@ -27,7 +27,7 @@ class RedisConfig {
     @Bean
     fun redisConnectionFactory(): RedisConnectionFactory {
         val redisConfiguration = RedisStandaloneConfiguration()
-        redisConfiguration.hostName = host!!
+        redisConfiguration.hostName = host
         redisConfiguration.port = port
 
         return LettuceConnectionFactory(redisConfiguration)
