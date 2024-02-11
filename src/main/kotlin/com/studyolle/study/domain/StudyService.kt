@@ -26,11 +26,11 @@ class StudyService(
         studyStore.createNewStudy(study)
     }
 
-    fun findById(studyIdx: Long): Study {
+    fun findById(studyIdx: Long): StudyCommand {
         val study: Optional<Study> = studyReader.findById(studyIdx)
 
         when (!study.isPresent) { // when절 써보기
-            true -> return study.get()
+            true -> return StudyCommand(study.get().path, study.get().title, study.get().shortDescription, study.get().fullDescription)
             false -> throw BadRequestException(ErrorMessage.NOT_EXIST_INFO)
         }
     }

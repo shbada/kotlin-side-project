@@ -39,6 +39,9 @@ class StudyController(
         return CommonResponse.send(studyFacade.findById(studyIdx))
     }
 
+    /**
+     * 스터디 리스트 조회
+     */
     @GetMapping()
     fun getStudyList(
     ): ResponseEntity<ResponseDto<List<StudyDto>>> {

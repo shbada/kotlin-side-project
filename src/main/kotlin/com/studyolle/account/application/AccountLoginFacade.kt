@@ -16,4 +16,8 @@ class AccountLoginFacade(
         accountLoginService.registerAccountLogin(registerForm)
     }
 
+    fun findById(accountLoginIdx: Long): AccountLoginCommand {
+        return accountLoginService.findById(accountLoginIdx)
+    }
+
 }

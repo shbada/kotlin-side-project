@@ -5,6 +5,7 @@ import com.studyolle.account.domain.AccountReader
 import com.studyolle.account.domain.command.AccountLoginCommand
 import com.studyolle.account.domain.entity.AccountLogin
 import org.springframework.stereotype.Component
+import java.util.*
 
 @Component
 class AccountLoginReaderImpl(
@@ -12,6 +13,10 @@ class AccountLoginReaderImpl(
 ): AccountLoginReader {
     override fun findAll(): MutableList<AccountLogin> {
         return accountLoginRepository.findAll()
+    }
+
+    override fun findById(accountLoginIdx: Long): Optional<AccountLogin> {
+        return accountLoginRepository.findById(accountLoginIdx)
     }
 
 }
