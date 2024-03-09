@@ -52,7 +52,7 @@ class ZoneController(
     }
 
     /**
-     * Zone 리스트 조회
+     * zone 리스트 조회
      */
     @GetMapping("/list")
     fun getZoneList(
